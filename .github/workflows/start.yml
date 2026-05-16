@@ -1,0 +1,8 @@
+name: First workflow
+on: push
+jobs:
+  First job:
+    runs-on: ubuntu-latest@v3
+    steps:
+      -name: Print somthing
+      run: echo "Something" 
