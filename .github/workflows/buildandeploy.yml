@@ -3,12 +3,14 @@ on:
   pull_request: 
     types: 
       - opened
+    path:
+      - src\components\HelpArea.css
   push: 
     branches: 
       - main
       - feat/**
     path:
-      - - src/components/HelpArea.css
+      - src\components\HelpArea.css
   workflow_dispatch:
 jobs:
   build:
