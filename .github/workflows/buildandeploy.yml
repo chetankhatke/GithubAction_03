@@ -18,7 +18,7 @@ jobs:
         run: npm run build
       - name: Build
         run: echo "Build done" 
-    deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
