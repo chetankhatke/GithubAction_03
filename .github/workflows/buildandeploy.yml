@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: 18
       - name: run test
-        run: npm tests
+        run: npm test
       - name: Build Project
         run: npm run build
       - name: Deploy
