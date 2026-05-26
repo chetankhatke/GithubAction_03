@@ -26,6 +26,11 @@ jobs:
         run: npm test
       - name: Build Project
         run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+         name: artifact
+         path: dist
       - name: Build
         run: echo "Build done" 
   deploy:
