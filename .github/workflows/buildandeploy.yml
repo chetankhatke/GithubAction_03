@@ -11,6 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.publish.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -29,6 +31,9 @@ jobs:
         with:
          name: artifact
          path: dist
+      - name: version generation
+        id: publish 
+        run: echo "version=27.1.5" >> $GITHUB_OUTPUT
       - name: Build
         run: echo "Build done" 
   deploy:
@@ -53,5 +58,7 @@ jobs:
         run: ls
       - name: Github context
         run: echo "${{toJson(github)}}"
+      - name: version echo
+        run: echo ${{needs.build.outputs.version}}
       - name: Deploy
         run: echo "Deploy done" 
