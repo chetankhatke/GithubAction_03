@@ -49,6 +49,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
          name: artifact
+      - name: List content
+        run: ls
       - name: Github context
         run: echo "${{toJson(github)}}"
       - name: Deploy
