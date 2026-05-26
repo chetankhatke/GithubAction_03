@@ -45,6 +45,10 @@ jobs:
         run: npm ci
       - name: Build Project
         run: npm run build
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+         name: artifact
       - name: Github context
         run: echo "${{toJson(github)}}"
       - name: Deploy
