@@ -8,6 +8,8 @@ on:
       - main
       - feat/**
   workflow_dispatch:
+env:
+  myscretkey: ${{secrets.MYSECRETKEY}}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,6 +36,8 @@ jobs:
       - name: version generation
         id: publish 
         run: echo "version=27.1.5" >> $GITHUB_OUTPUT
+      - name: echo secret
+        run: echo ${{env.myscretkey}}
       - name: Build
         run: echo "Build done" 
   deploy:
