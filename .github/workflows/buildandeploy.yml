@@ -61,7 +61,7 @@ jobs:
       - name: List content
         run: ls
       - name: Github context
-        run: echo "${{toJson(github)}}"
+        run: echo ${{toJson(github)}}
       - name: version echo
         run: echo ${{needs.build.outputs.version}}
       - name: Deploy
