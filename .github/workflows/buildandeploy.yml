@@ -35,7 +35,7 @@ jobs:
          path: dist
       - name: version generation
         id: publish 
-        run: echo version=27.1.5 >> $GITHUB_OUTPUT
+        run: echo "version=27.1.5" >> $GITHUB_OUTPUT
       - name: echo secret
         run: echo ${{env.myscretkey}}
       - name: Build
@@ -61,8 +61,8 @@ jobs:
       - name: List content
         run: ls
       - name: Github context
-        run: echo ${{toJson(github)}}
+        run: echo "${{toJson(github)}}"
       - name: version echo
-        run: echo ${{needs.build.outputs.version}}
+        run: echo "${{needs.build.outputs.version}}"
       - name: Deploy
         run: echo "Deploy done" 
