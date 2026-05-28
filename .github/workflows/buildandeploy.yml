@@ -7,12 +7,14 @@ on:
     branches: 
       - main
       - feat/**
-    paths:
-      - src/components/HelpArea.css
   workflow_dispatch:
+env:
+  myscretkey: ${{secrets.MYSECRETKEY}}
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.publish.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -26,6 +28,16 @@ jobs:
         run: npm test
       - name: Build Project
         run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+         name: artifact
+         path: dist
+      - name: version generation
+        id: publish 
+        run: echo "version=27.1.5" >> $GITHUB_OUTPUT
+      - name: echo secret
+        run: echo ${{env.myscretkey}}
       - name: Build
         run: echo "Build done" 
   deploy:
@@ -42,7 +54,15 @@ jobs:
         run: npm ci
       - name: Build Project
         run: npm run build
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+         name: artifact
+      - name: List content
+        run: ls
       - name: Github context
         run: echo "${{toJson(github)}}"
+      - name: version echo
+        run: echo "${{needs.build.outputs.version}}"
       - name: Deploy
         run: echo "Deploy done" 
